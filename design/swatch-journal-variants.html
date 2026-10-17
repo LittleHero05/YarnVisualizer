@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Option A Variants</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  .switch { position: sticky; top: 0; z-index: 50; display: flex; gap: 6px; justify-content: center; padding: 8px; background: #111; font: 500 13px/1 Inter, sans-serif; }
+  .switch button { border: 0; border-radius: 99px; padding: 8px 14px; background: #333; color: #ddd; cursor: pointer; font: inherit; }
+  .switch button.on { background: #fff; color: #111; }
+  .opt { display: none; min-height: 100vh; }
+  .opt.on { display: block; }
+  svg.sweater { width: 100%; height: auto; aspect-ratio: 220 / 180; display: block; }
+  .wrap { max-width: 1140px; margin: 0 auto; padding: 0 16px; }
+  .serif { font-family: 'Instrument Serif', serif; font-weight: 400; }
+  .hand { font-family: 'Caveat', cursive; }
+
+  /* =====================================================================
+     A1 — "Field Notebook": ruled paper, spiral binding, washi tape,
+     highlighter swipes, index tabs, shopping-list checklist.
+     ===================================================================== */
+  .n1 { --paper: #fbf8ec; --rule: #dde6d3; --ink: #1f3a2b; --green: #2f6b3f; --green-ink: #fbf8ec; --yellow: #f6d84c; --hl: #fbe983; --sage: #d4e4c6; --margin: #9cc28a;
+        color: var(--ink); font: 400 15px/1.6 Inter, sans-serif;
+        background-color: var(--paper);
+        background-image: linear-gradient(var(--rule) 1px, transparent 1px);
+        background-size: 100% 30px; }
+  .n1 .book { position: relative; max-width: 1180px; margin: 0 auto; padding-left: 58px; border-left: 0; }
+  /* spiral binding down the left edge */
+  .n1 .book::before { content: ''; position: absolute; left: 14px; top: 0; bottom: 0; width: 26px;
+        background: radial-gradient(circle at 13px 15px, #fff 6px, var(--ink) 6.5px, var(--ink) 8px, transparent 8.5px) 0 0 / 26px 30px repeat-y; }
+  .n1 .book::after { content: ''; position: absolute; left: 50px; top: 0; bottom: 0; border-left: 1.5px solid var(--margin); }
+  .n1 nav { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+  .n1 nav .links { display: flex; gap: 18px; }
+  .n1 .logo { font: 700 30px/1 Caveat; color: var(--green); text-transform: none; letter-spacing: 0; }
+  .n1 .logo span { background: linear-gradient(transparent 55%, var(--hl) 55% 90%, transparent 90%); padding: 0 4px; }
+  .n1 .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 36px; align-items: center; padding: 30px 16px 50px; }
+  .n1 .eyebrow { font: 600 22px/1 Caveat; color: var(--green); margin-bottom: 8px; }
+  .n1 h1 { font: 400 clamp(40px, 5.6vw, 66px)/1 'Instrument Serif'; margin: 0 0 18px; letter-spacing: -.01em; }
+  .n1 .mark { background: linear-gradient(100deg, transparent 2%, var(--hl) 4% 96%, transparent 98%); background-size: 100% 62%; background-position: 0 75%; background-repeat: no-repeat; padding: 0 4px; font-style: italic; }
+  .n1 .lede { max-width: 440px; margin: 0 0 22px; }
+  .n1 .pill { display: inline-block; border-radius: 99px; padding: 11px 22px; font: 600 11px/1 Inter; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; border: 1.5px solid var(--green); }
+  .n1 .pill.solid { background: var(--green); color: var(--green-ink); }
+  .n1 .pill.ghost { color: var(--green); background: transparent; }
+  /* taped photo of the sweater */
+  .n1 .polaroid { position: relative; background: #fff; padding: 18px 18px 46px; box-shadow: 0 10px 30px #1f3a2b1f; transform: rotate(2deg); max-width: 420px; justify-self: center; width: 100%; }
+  .n1 .polaroid .img { background: var(--sage); padding: 16px; }
+  .n1 .polaroid .cap { position: absolute; left: 0; right: 0; bottom: 12px; text-align: center; font: 600 22px/1 Caveat; }
+  .n1 .tape { position: absolute; width: 110px; height: 30px; background: #f6d84ccc; top: -14px; left: 50%; transform: translateX(-50%) rotate(-4deg); background-image: repeating-linear-gradient(90deg, transparent 0 8px, #ffffff40 8px 10px); }
+  .n1 .note { position: absolute; font: 600 21px/1.1 Caveat; color: var(--green); }
+  .n1 .note svg { width: 70px; height: 56px; display: block; color: var(--green); }
+  /* index tabs on the right edge */
+  .n1 .tabs { position: absolute; right: -1px; top: 130px; display: flex; flex-direction: column; gap: 6px; }
+  .n1 .tabs span { writing-mode: vertical-rl; padding: 14px 7px; border-radius: 8px 0 0 8px; font: 600 11px/1 Inter; letter-spacing: .1em; text-transform: uppercase; }
+  .n1 .tabs span:nth-child(odd) { background: var(--yellow); }
+  .n1 .tabs span:nth-child(even) { background: var(--sage); }
+  .n1 .stitchrow { display: flex; justify-content: center; gap: 18px; padding: 10px 0; border-top: 1.5px dashed var(--green); border-bottom: 1.5px dashed var(--green); font: 600 11px/1 Inter; letter-spacing: .12em; text-transform: uppercase; color: var(--green); flex-wrap: wrap; }
+  .n1 .stitchrow i { font-style: normal; color: var(--yellow); -webkit-text-stroke: .6px var(--green); }
+  .n1 .studio { padding: 48px 16px 64px; }
+  .n1 .studio h2 { font: 400 clamp(28px, 3.8vw, 42px)/1.1 'Instrument Serif'; text-align: center; margin: 0 0 30px; }
+  .n1 .cols { display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 22px; align-items: start; }
+  .n1 .page { background: #fffdf6; border: 1.5px solid var(--ink); border-radius: 4px 18px 18px 4px; padding: 20px; position: relative; box-shadow: 4px 4px 0 var(--sage); }
+  .n1 .page .num { position: absolute; top: -14px; left: 18px; background: var(--yellow); border: 1.5px solid var(--ink); border-radius: 99px; padding: 3px 12px; font: 700 18px/1 Caveat; }
+  .n1 .page h3 { font: 400 26px/1.1 'Instrument Serif'; margin: 8px 0 14px; }
+  .n1 .field { font-size: 12px; margin-bottom: 12px; }
+  .n1 .field span { display: block; color: #5e7365; margin-bottom: 3px; }
+  .n1 .field .in { border-bottom: 1.5px solid var(--ink); padding: 4px 0; font: 600 22px/1.1 Caveat; }
+  .n1 .chips { display: flex; gap: 8px; margin: 6px 0 14px; }
+  .n1 .chips i { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--ink); display: block; }
+  .n1 .palette { display: flex; height: 22px; border: 1.5px solid var(--ink); border-radius: 99px; overflow: hidden; margin-bottom: 8px; }
+  .n1 .palette i { flex: 1; }
+  .n1 .seg { display: inline-flex; border: 1.5px solid var(--ink); border-radius: 99px; overflow: hidden; margin-bottom: 10px; }
+  .n1 .seg b { padding: 5px 14px; font: 600 11px/1.4 Inter; letter-spacing: .08em; text-transform: uppercase; }
+  .n1 .seg b.on { background: var(--green); color: var(--green-ink); }
+  .n1 .preview { background: var(--sage); border-radius: 12px; padding: 14px; }
+  .n1 .check { list-style: none; padding: 0; margin: 0; }
+  .n1 .check li { display: flex; align-items: center; gap: 10px; padding: 6px 0; font: 600 21px/1.2 Caveat; border-bottom: 1px solid var(--rule); }
+  .n1 .check li .box { width: 18px; height: 18px; border: 1.5px solid var(--ink); border-radius: 4px; flex: none; }
+  .n1 .check li.done .box { background: var(--yellow); }
+  .n1 .check li em { margin-left: auto; font-style: normal; font: 600 13px Inter; }
+  .n1 small.fine { display: block; font-size: 12px; color: #5e7365; margin-top: 10px; }
+  @media (max-width: 800px) {
+    .n1 .book { padding-left: 34px; }
+    .n1 .book::before { left: 4px; transform: scale(.8); transform-origin: left top; }
+    .n1 .book::after { left: 30px; }
+    .n1 .hero, .n1 .cols { grid-template-columns: 1fr; }
+    .n1 nav .links, .n1 .tabs, .n1 .note { display: none; }
+    .n1 .polaroid { transform: rotate(1.5deg); }
+  }
+
+  /* =====================================================================
+     A2 — "Swatch Journal": dot-grid page, yarn-wrap palette cards,
+     a looping yarn strand that links the steps, swatch-tag preview.
+     ===================================================================== */
+  .n2 { --paper: #f7f6ee; --dot: #cfd8c4; --ink: #22332a; --moss: #3e7a4f; --moss-ink: #f7f6ee; --yellow: #ffd84d; --cream: #fff4b8; --mint: #dceadb;
+        color: var(--ink); font: 400 15px/1.6 Inter, sans-serif;
+        background-color: var(--paper);
+        background-image: radial-gradient(var(--dot) 1.2px, transparent 1.4px);
+        background-size: 22px 22px; }
+  .n2 nav { display: flex; justify-content: space-between; align-items: center; padding: 16px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+  .n2 nav .links { display: flex; gap: 18px; }
+  .n2 .logo { display: flex; align-items: center; gap: 8px; font: 400 26px/1 'Instrument Serif'; text-transform: none; letter-spacing: 0; }
+  .n2 .logo .dot { width: 22px; height: 22px; border-radius: 50%; background: var(--yellow); border: 1.5px solid var(--ink); }
+  .n2 .meta { display: flex; justify-content: space-between; padding: 0 16px; font: 600 12px/1 Inter; letter-spacing: .1em; text-transform: uppercase; color: var(--moss); }
+  .n2 .hero { text-align: center; padding: 40px 16px 20px; position: relative; }
+  .n2 .hero .kicker { display: inline-block; background: var(--cream); border: 1.5px solid var(--ink); border-radius: 99px; padding: 4px 14px; font: 600 11px/1.4 Inter; letter-spacing: .12em; text-transform: uppercase; }
+  .n2 h1 { font: 400 clamp(42px, 7vw, 86px)/.98 'Instrument Serif'; margin: 18px auto 16px; max-width: 900px; letter-spacing: -.015em; }
+  .n2 h1 em { color: var(--moss); }
+  .n2 h1 .circled { position: relative; display: inline-block; isolation: isolate; }
+  .n2 h1 .circled svg { position: absolute; inset: -14% -8%; width: 116%; height: 128%; color: var(--yellow); z-index: -1; }
+  .n2 .lede { max-width: 540px; margin: 0 auto 24px; }
+  .n2 .pill { display: inline-block; border-radius: 99px; padding: 11px 22px; font: 600 11px/1 Inter; letter-spacing: .12em; text-transform: uppercase; border: 1.5px solid var(--ink); cursor: pointer; }
+  .n2 .pill.solid { background: var(--moss); color: var(--moss-ink); border-color: var(--moss); }
+  .n2 .pill.yellow { background: var(--yellow); }
+  .n2 .strand { display: block; width: 100%; height: 70px; color: var(--moss); margin: 10px 0 0; }
+  /* swatch tag preview */
+  .n2 .stage { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 26px; align-items: center; padding: 10px 16px 40px; }
+  .n2 .tag { position: relative; background: #fff; border: 1.5px solid var(--ink); border-radius: 18px 18px 18px 18px; padding: 26px 20px 20px; clip-path: polygon(14% 0, 86% 0, 100% 10%, 100% 100%, 0 100%, 0 10%); }
+  .n2 .tag-wrap { position: relative; padding-top: 40px; }
+  .n2 .tag-wrap .hole { position: absolute; top: 52px; left: 50%; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%; border: 1.5px solid var(--ink); background: var(--paper); z-index: 2; }
+  .n2 .tag-wrap .string { position: absolute; top: 0; left: 50%; width: 120px; height: 66px; margin-left: -10px; color: var(--ink); z-index: 3; }
+  .n2 .tag .label { display: flex; justify-content: space-between; font: 600 11px/1 Inter; letter-spacing: .1em; text-transform: uppercase; margin: 14px 0 10px; }
+  .n2 .tag .art { background: var(--mint); border-radius: 12px; padding: 14px; }
+  .n2 .seg { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
+  .n2 .seg b { border: 1.5px solid var(--ink); border-radius: 99px; padding: 4px 14px; font: 600 11px/1.4 Inter; text-transform: uppercase; letter-spacing: .08em; }
+  .n2 .seg b.on { background: var(--yellow); }
+  .n2 .side h3 { font: 400 28px/1.1 'Instrument Serif'; margin: 0 0 10px; }
+  .n2 .side p { margin: 0 0 12px; font-size: 14px; }
+  .n2 .anno { font: 600 22px/1.15 Caveat; color: var(--moss); }
+  /* yarn-wrap palette cards (yarn wound around cardboard) */
+  .n2 .wraps { display: flex; gap: 12px; }
+  .n2 .wrapcard { flex: 1; background: #e8dcc2; border: 1.5px solid var(--ink); border-radius: 6px; padding: 10px 8px; display: flex; flex-direction: column; gap: 3px; }
+  .n2 .wrapcard i { display: block; height: 14px; border-radius: 3px; background-image: repeating-linear-gradient(100deg, transparent 0 3px, #00000024 3px 4px); }
+  .n2 .wrapcard b { font: 600 10px/1 Inter; letter-spacing: .08em; text-transform: uppercase; margin-top: 6px; text-align: center; }
+  /* steps linked by a looping strand */
+  .n2 .steps { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; padding: 30px 16px 70px; }
+  .n2 .steps .link { position: absolute; left: 6%; right: 6%; top: 44px; height: 60px; width: 88%; color: var(--moss); z-index: 0; }
+  .n2 .step { position: relative; z-index: 1; background: #fffef8; border: 1.5px solid var(--ink); border-radius: 16px; padding: 18px; }
+  .n2 .step .n { width: 36px; height: 36px; border-radius: 50%; background: var(--yellow); border: 1.5px solid var(--ink); display: grid; place-items: center; font: 400 22px/1 'Instrument Serif'; margin-bottom: 10px; }
+  .n2 .step h4 { font: 400 24px/1.1 'Instrument Serif'; margin: 0 0 8px; }
+  .n2 .step .in { border: 1.5px solid var(--ink); border-radius: 10px; padding: 7px 10px; font-size: 13px; background: var(--paper); margin-bottom: 8px; }
+  .n2 table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .n2 td { padding: 5px 0; border-bottom: 1px dotted var(--ink); }
+  .n2 td:last-child { text-align: right; font-weight: 600; }
+  .n2 .sw { display: inline-block; width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--ink); margin-right: 6px; vertical-align: -1px; }
+  .n2 footer { text-align: center; padding: 0 16px 40px; font: 600 22px/1 Caveat; color: var(--moss); }
+  @media (max-width: 800px) {
+    .n2 nav .links { display: none; }
+    .n2 .stage { grid-template-columns: 1fr; }
+    .n2 .steps { grid-template-columns: 1fr; }
+    .n2 .steps .link { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <pattern id="knitV" width="5" height="5" patternUnits="userSpaceOnUse">
+      <path d="M0.5 0.5 L2.5 4.5 L4.5 0.5" fill="none" stroke="#000" stroke-opacity=".14" stroke-width=".8" />
+    </pattern>
+    <symbol id="sweater" viewBox="0 0 220 180">
+      <g stroke="var(--s-ink, #222)" stroke-width="1.5" stroke-linejoin="round">
+        <path d="M80 18 L22 112 L42 126 L72 82 L72 56 Z" fill="var(--s1)" />
+        <path d="M140 18 L198 112 L178 126 L148 82 L148 56 Z" fill="var(--s1)" />
+        <path d="M80 18 Q110 40 140 18 L148 56 L152 168 L68 168 L72 56 Z" fill="var(--s1)" />
+        <path d="M72 70 L148 70 L149 84 L71 84 Z M71 98 L149 98 L150 112 L70 112 Z M70 126 L150 126 L151 140 L69 140 Z" fill="var(--s2)" stroke="none" />
+        <path d="M68 156 L152 156 L152 168 L68 168 Z" fill="var(--s3)" />
+        <path d="M22 112 L42 126 L36 134 L15 121 Z M198 112 L178 126 L184 134 L205 121 Z" fill="var(--s3)" />
+        <path d="M80 18 Q110 40 140 18 L136 12 Q110 31 84 12 Z" fill="var(--s3)" />
+        <path d="M80 18 Q110 40 140 18 L148 56 L152 168 L68 168 L72 56 Z M80 18 L22 112 L42 126 L72 82 Z M140 18 L198 112 L178 126 L148 82 Z" fill="url(#knitV)" stroke="none" />
+      </g>
+    </symbol>
+    <symbol id="arrowloop" viewBox="0 0 140 120">
+      <path d="M8 10 C 60 0, 90 40, 60 60 C 36 76, 30 40, 58 40 C 92 40, 110 80, 120 108" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+      <path d="M108 100 L120 110 L126 94" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+    <symbol id="strand" viewBox="0 0 600 70" preserveAspectRatio="none">
+      <path d="M0 40 C 60 40, 80 10, 110 18 C 136 26, 124 56, 104 50 C 84 44, 100 12, 150 22 C 210 34, 240 54, 300 44 C 340 38, 350 12, 330 14 C 306 16, 318 54, 370 50 C 430 46, 450 20, 480 24 C 506 28, 500 58, 482 52 C 464 46, 484 18, 530 26 C 560 32, 580 40, 600 38" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" vector-effect="non-scaling-stroke" />
+    </symbol>
+    <symbol id="scribble" viewBox="0 0 200 80" preserveAspectRatio="none">
+      <path d="M20 44 C 20 14, 180 6, 186 36 C 192 66, 30 78, 14 50 C 2 30, 90 10, 170 20" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" vector-effect="non-scaling-stroke" />
+    </symbol>
+    <symbol id="string" viewBox="0 0 120 66">
+      <path d="M10 64 C 10 30, 30 6, 56 10 C 80 14, 76 40, 58 38 C 40 36, 52 6, 90 8 C 108 9, 116 20, 118 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </symbol>
+  </defs>
+</svg>
+
+<div class="switch" role="tablist">
+  <button class="on" data-o="n1">A1 · Field Notebook</button>
+  <button data-o="n2">A2 · Swatch Journal</button>
+</div>
+
+<!-- ============================ A1 ============================ -->
+<section class="opt n1 on" id="n1">
+  <div class="book">
+    <nav>
+      <span class="links"><b>Patterns</b><b>Yarns</b><b>Palettes</b></span>
+      <span class="logo"><span>loop &amp; swatch</span></span>
+      <span class="links"><b>My projects</b><b>About</b></span>
+    </nav>
+    <div class="tabs"><span>Pattern</span><span>Yarn</span><span>Colors</span><span>Size</span></div>
+
+    <div class="hero">
+      <div>
+        <div class="eyebrow">notes for your next make ↓</div>
+        <h1>See your sweater <span class="mark">before</span> you cast on</h1>
+        <p class="lede">Pick a pattern from Ravelry, bring your own yarn or borrow one of our palettes, choose a size, and get an approximate preview plus the yardage you'll need.</p>
+        <a class="pill solid">Start a project</a> &nbsp; <a class="pill ghost">Browse palettes</a>
+      </div>
+      <div style="position:relative">
+        <div class="polaroid">
+          <div class="tape"></div>
+          <div class="img"><svg class="sweater" style="--s1:#f4ecd4;--s2:#2f6b3f;--s3:#f6d84c;--s-ink:#1f3a2b"><use href="#sweater" /></svg></div>
+          <div class="cap">Flax · size M · worsted</div>
+        </div>
+        <div class="note" style="left:-70px;bottom:20px"><svg style="transform:scaleY(-1) rotate(-30deg)"><use href="#arrowloop" /></svg>your colors!</div>
+      </div>
+    </div>
+
+    <div class="stitchrow"><span>Raglan</span><i>✱</i><span>Round yoke</span><i>✱</i><span>Drop shoulder</span><i>✱</i><span>Cardigan</span><i>✱</i><span>Stripes</span><i>✱</i><span>Fair Isle</span></div>
+
+    <div class="studio">
+      <h2>Let's plan this sweater together</h2>
+      <div class="cols">
+        <div class="page">
+          <span class="num">p. 1</span>
+          <h3>Pattern &amp; yarn</h3>
+          <div class="field"><span>Pattern</span><div class="in">Flax worsted, Tin Can Knits</div></div>
+          <div class="field"><span>Weight &amp; fiber</span><div class="in">Worsted · wool</div></div>
+          <div class="field"><span>Your colors</span></div>
+          <div class="chips"><i style="background:#f4ecd4"></i><i style="background:#2f6b3f"></i><i style="background:#f6d84c"></i></div>
+          <div class="palette"><i style="background:#2f4a35"></i><i style="background:#9aa98a"></i><i style="background:#efe6d6"></i><i style="background:#d9a441"></i></div>
+          <div class="palette"><i style="background:#f6d84c"></i><i style="background:#1f3a2b"></i><i style="background:#f4ecd4"></i><i style="background:#7fae73"></i></div>
+        </div>
+        <div class="page">
+          <span class="num">p. 2</span>
+          <h3>Approximate look</h3>
+          <div class="seg"><b class="on">Front</b><b>Back</b></div>
+          <div class="preview"><svg class="sweater" style="--s1:#f4ecd4;--s2:#2f6b3f;--s3:#f6d84c;--s-ink:#1f3a2b"><use href="#sweater" /></svg></div>
+          <small class="fine hand" style="font-size:19px;color:var(--green)">↳ colors are approximate, swatch first!</small>
+        </div>
+        <div class="page">
+          <span class="num">p. 3</span>
+          <h3>Shopping list</h3>
+          <ul class="check">
+            <li class="done"><span class="box"></span>Oatmeal ×5 <em>860 yd</em></li>
+            <li><span class="box"></span>Forest ×2 <em>310 yd</em></li>
+            <li><span class="box"></span>Butter ×1 <em>165 yd</em></li>
+          </ul>
+          <small class="fine">Total 1,335 yd · gauge 18 × 22 / 4" from the pattern · +8% texture · 10% buffer</small>
+          <p style="margin:14px 0 0"><a class="pill ghost">Make it more accurate</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ A2 ============================ -->
+<section class="opt n2" id="n2">
+  <nav>
+    <span class="logo"><span class="dot"></span>swatch journal</span>
+    <span class="links"><b>Patterns</b><b>Yarns</b><b>Palettes</b><b>My projects</b></span>
+  </nav>
+  <div class="meta"><span>No. 012</span><span>Project: sweater</span></div>
+
+  <div class="hero">
+    <span class="kicker">Before you buy yarn</span>
+    <h1>Plan your sweater in <span class="circled"><svg><use href="#scribble" /></svg>real</span> colors, <em>stitch by stitch</em></h1>
+    <p class="lede">Choose a Ravelry pattern, add your yarn or let us suggest a palette, pick your size. We'll sketch the sweater and count the yards.</p>
+    <a class="pill solid">Start a project</a> &nbsp; <a class="pill yellow">Shuffle a palette</a>
+    <svg class="strand"><use href="#strand" /></svg>
+  </div>
+
+  <div class="wrap">
+    <div class="stage">
+      <div class="side">
+        <h3>Yarn wraps</h3>
+        <p>Your palette wound on a card, the way you'd test colors at the shop.</p>
+        <div class="wraps">
+          <div class="wrapcard"><i style="background-color:#f4ecd4"></i><i style="background-color:#f4ecd4"></i><i style="background-color:#3e7a4f"></i><i style="background-color:#ffd84d"></i><i style="background-color:#f4ecd4"></i><b>Mine</b></div>
+          <div class="wrapcard"><i style="background-color:#22332a"></i><i style="background-color:#ffd84d"></i><i style="background-color:#22332a"></i><i style="background-color:#dceadb"></i><i style="background-color:#22332a"></i><b>Night</b></div>
+          <div class="wrapcard"><i style="background-color:#9aa98a"></i><i style="background-color:#efe6d6"></i><i style="background-color:#d9a441"></i><i style="background-color:#efe6d6"></i><i style="background-color:#9aa98a"></i><b>Meadow</b></div>
+        </div>
+      </div>
+      <div class="tag-wrap">
+        <svg class="string"><use href="#string" /></svg>
+        <span class="hole"></span>
+        <div class="tag">
+          <div class="label"><span>Flax · M</span><span>Worsted wool</span></div>
+          <div class="art"><svg class="sweater" style="--s1:#f4ecd4;--s2:#3e7a4f;--s3:#ffd84d;--s-ink:#22332a"><use href="#sweater" /></svg></div>
+          <div class="seg"><b class="on">Front</b><b>Back</b></div>
+        </div>
+      </div>
+      <div class="side">
+        <p class="anno">↙ that's your sweater, roughly!</p>
+        <h3>Yarn to buy</h3>
+        <table>
+          <tr><td><span class="sw" style="background:#f4ecd4"></span>Oatmeal</td><td>860 yd · 5</td></tr>
+          <tr><td><span class="sw" style="background:#3e7a4f"></span>Moss</td><td>310 yd · 2</td></tr>
+          <tr><td><span class="sw" style="background:#ffd84d"></span>Butter</td><td>165 yd · 1</td></tr>
+          <tr><td><b>Total</b></td><td>1,335 yd</td></tr>
+        </table>
+        <p style="font-size:12px;margin-top:8px">Colors are approximate and may vary.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="steps">
+      <svg class="link"><use href="#strand" /></svg>
+      <div class="step"><div class="n">1</div><h4>Pattern</h4><div class="in">Flax worsted</div><small>Shape and gauge come from Ravelry.</small></div>
+      <div class="step"><div class="n">2</div><h4>Yarn</h4><div class="in">Worsted · wool</div><small>Your own yarn or a suggestion.</small></div>
+      <div class="step"><div class="n">3</div><h4>Colors</h4><div class="in">3 colors · Meadow</div><small>Lock one, shuffle the rest.</small></div>
+      <div class="step"><div class="n">4</div><h4>Size</h4><div class="in">M · classic fit</div><small>Proportions and yardage update.</small></div>
+    </div>
+  </div>
+  <footer>happy knitting ♡</footer>
+</section>
+
+<script>
+  document.querySelectorAll('.switch button').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('.switch button').forEach((x) => x.classList.toggle('on', x === b));
+    document.querySelectorAll('.opt').forEach((o) => o.classList.toggle('on', o.id === b.dataset.o));
+    window.scrollTo(0, 0);
+  }));
+</script>
+</body>
+</html>

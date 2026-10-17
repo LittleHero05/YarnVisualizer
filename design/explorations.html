@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Design Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Caveat:wght@500;700&family=Chewy&family=Fredoka:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; }
+  /* Option switcher (not part of the designs) */
+  .switch { position: sticky; top: 0; z-index: 50; display: flex; gap: 6px; justify-content: center; padding: 8px; background: #111; font: 500 13px/1 Inter, sans-serif; }
+  .switch button { border: 0; border-radius: 99px; padding: 8px 14px; background: #333; color: #ddd; cursor: pointer; font: inherit; }
+  .switch button.on { background: #fff; color: #111; }
+  .opt { display: none; min-height: 100vh; }
+  .opt.on { display: block; }
+  svg.sweater { width: 100%; height: auto; aspect-ratio: 220 / 180; display: block; }
+  svg.yarnball { aspect-ratio: 1; height: auto; }
+  svg.loop { aspect-ratio: 140 / 120; height: auto; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+
+  /* =====================================================================
+     A — "Studio Journal"  (editorial serif, rust pills, dashed callouts, loop arrows)
+     ===================================================================== */
+  .a { --ink: #2b2420; --rust: #e2552d; --rust-ink: #fff; --cream: #fffaf2; --butter: #fdf3a7; --line: #8a3b22; --sky: #dcecf7;
+       background: var(--cream); color: var(--ink); font: 400 15px/1.55 Inter, sans-serif; }
+  .a nav { display: flex; justify-content: space-between; padding: 14px 16px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+  .a nav span { display: flex; gap: 18px; }
+  .a .logo { font: 400 28px/1 'Caveat', cursive; color: var(--rust); font-weight: 700; letter-spacing: 0; text-transform: none; }
+  .a .hero { display: grid; grid-template-columns: 1fr 1fr; border-top: 1.5px solid var(--line); border-bottom: 1.5px solid var(--line); }
+  .a .hero-art { background: var(--sky); display: grid; place-items: center; padding: 28px; position: relative; border-right: 1.5px solid var(--line); background-image: repeating-linear-gradient(90deg, transparent 0 22px, #ffffff80 22px 24px); }
+  .a .hero-art svg.sweater { max-width: 360px; }
+  .a .badge { position: absolute; top: 18px; right: 18px; width: 86px; height: 86px; border-radius: 50%; background: var(--butter); display: grid; place-items: center; font: 700 20px/1 'Caveat'; color: var(--rust); transform: rotate(-12deg); text-align: center; }
+  .a .hero-copy { padding: 48px 40px; display: flex; flex-direction: column; justify-content: center; }
+  .a .script { font: 500 22px/1 'Caveat', cursive; color: var(--ink); margin-bottom: 6px; }
+  .a h1 { font: 400 clamp(36px, 5vw, 58px)/1.02 'Instrument Serif', serif; margin: 0 0 16px; letter-spacing: -.01em; }
+  .a h1 em { color: var(--rust); }
+  .a p.lede { max-width: 420px; font-size: 14px; margin: 0 0 22px; }
+  .a .pill { display: inline-block; background: var(--rust); color: var(--rust-ink); border: 0; border-radius: 99px; padding: 10px 22px; font: 600 11px/1 Inter; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; }
+  .a .pill.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+  .a .ticker { display: flex; gap: 28px; white-space: nowrap; overflow: hidden; padding: 9px 0; border-bottom: 1.5px solid var(--line); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--line); }
+  .a .ticker b { color: var(--rust); }
+  .a .intro { text-align: center; padding: 56px 16px 24px; position: relative; }
+  .a .intro h2 { font: 400 clamp(26px, 3.6vw, 40px)/1.15 'Instrument Serif'; margin: 0 auto; max-width: 760px; }
+  .a .loop { position: absolute; width: 140px; color: var(--ink); }
+  .a .dashed { border: 2px dashed var(--rust); border-radius: 18px; max-width: 460px; margin: 28px auto 0; padding: 26px; text-align: center; background: #fff; }
+  .a .tag { display: inline-block; background: var(--sky); padding: 3px 10px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+  .a .dashed h3 { font: 400 28px/1.1 'Instrument Serif'; margin: 10px 0 14px; }
+  .a .studio { background: var(--butter); border-radius: 40px 40px 0 0; margin-top: 56px; padding: 40px 0 56px; }
+  .a .studio h4 { text-align: center; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 24px; }
+  .a .cols { display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 18px; }
+  .a .card { background: #fff; border-radius: 22px; padding: 22px; }
+  .a .card .kicker { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+  .a .card h5 { font: 400 26px/1.1 'Instrument Serif'; margin: 4px 0 14px; }
+  .a .field { display: block; font-size: 12px; margin-bottom: 12px; }
+  .a .field span { display: block; color: #7b6e65; margin-bottom: 4px; }
+  .a .field .in { border: 1.5px solid #e9dccd; border-radius: 12px; padding: 10px 12px; background: var(--cream); font-size: 14px; }
+  .a .chips { display: flex; gap: 8px; margin: 6px 0 14px; }
+  .a .chips i { width: 38px; height: 38px; border-radius: 50%; display: block; border: 2px solid #fff; box-shadow: 0 0 0 1.5px var(--ink); }
+  .a .palette { display: flex; height: 26px; border-radius: 99px; overflow: hidden; margin-bottom: 8px; border: 1.5px solid var(--ink); }
+  .a .palette i { flex: 1; }
+  .a .preview { background: var(--sky); border-radius: 18px; padding: 16px; }
+  .a .seg { display: inline-flex; border: 1.5px solid var(--ink); border-radius: 99px; overflow: hidden; margin-bottom: 10px; }
+  .a .seg b { padding: 6px 14px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; }
+  .a .seg b.on { background: var(--ink); color: var(--cream); }
+  .a table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .a td { padding: 8px 0; border-bottom: 1px dashed #e0cbb6; }
+  .a td:last-child { text-align: right; font-weight: 600; }
+  .a .note { font: 500 18px/1.2 'Caveat'; color: var(--rust); margin-top: 10px; }
+  @media (max-width: 760px) {
+    .a .hero, .a .cols { grid-template-columns: 1fr; }
+    .a .hero-art { border-right: 0; border-bottom: 1.5px solid var(--line); }
+    .a .hero-copy { padding: 28px 16px; }
+    .a nav span:first-child, .a nav span:last-child { display: none; }
+    .a nav { justify-content: center; }
+    .a .loop { display: none; }
+  }
+
+  /* =====================================================================
+     B — "Doodle Pop"  (pale butter bg, chunky outlined pill headings, doodles)
+     ===================================================================== */
+  .b { --ink: #141414; --pink: #ff4fa3; --sun: #fff6b8; --mint: #8fe3c7; --sky: #7fd3ff; --tomato: #ff7a45;
+       background: var(--sun); color: var(--ink); font: 500 15px/1.5 Fredoka, sans-serif; }
+  .b nav { display: flex; justify-content: space-between; align-items: center; padding: 16px; }
+  .b .home { font: 400 22px/1 Chewy; border: 3px solid var(--ink); border-radius: 14px; padding: 4px 12px; background: #ffe066; transform: rotate(-4deg); }
+  .b .menu { display: flex; border: 2.5px solid var(--ink); background: #fff; }
+  .b .menu span { padding: 7px 12px; font-size: 13px; font-weight: 600; border-right: 2.5px solid var(--ink); }
+  .b .menu span:last-child { border-right: 0; }
+  .b .bubble { display: inline-block; font: 400 clamp(44px, 9vw, 104px)/1 Chewy, cursive; background: var(--pink); border: 5px solid var(--ink); border-radius: 999px; padding: 6px 42px 14px; letter-spacing: .02em; box-shadow: 6px 6px 0 var(--ink); }
+  .b .hero { position: relative; padding: 24px 0 8px; }
+  .b .hero .bubble:nth-child(2) { margin-left: 8%; margin-top: 10px; transform: rotate(-2deg); }
+  .b .hero .yarnball { position: absolute; right: 4%; top: 0; width: 170px; }
+  .b .hero p { max-width: 520px; margin: 22px 0 0 12%; font-size: 17px; font-weight: 600; }
+  .b .btn { display: inline-block; background: #fff; border: 3px solid var(--ink); border-radius: 14px; padding: 10px 18px; font: 600 15px/1 Fredoka; box-shadow: 4px 4px 0 var(--ink); cursor: pointer; }
+  .b .btn.pink { background: var(--pink); }
+  .b .section-title { text-align: center; margin: 56px 0 26px; }
+  .b .section-title .bubble { font-size: clamp(32px, 6vw, 64px); background: var(--mint); padding: 4px 32px 10px; }
+  .b .board { display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 18px; align-items: start; padding-bottom: 60px; }
+  .b .box { background: #fff; border: 3px solid var(--ink); border-radius: 22px; padding: 18px; box-shadow: 5px 5px 0 var(--ink); }
+  .b .box h3 { font: 400 26px/1 Chewy; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+  .b .num { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--tomato); border: 2.5px solid var(--ink); font: 700 15px/1 Fredoka; }
+  .b .in { border: 2.5px solid var(--ink); border-radius: 12px; padding: 9px 12px; margin: 4px 0 12px; background: var(--sun); }
+  .b label { font-size: 13px; font-weight: 600; }
+  .b .chips { display: flex; gap: 8px; margin: 6px 0 12px; }
+  .b .chips i { width: 42px; height: 42px; border-radius: 50%; border: 3px solid var(--ink); display: block; }
+  .b .palette { display: flex; height: 30px; border: 3px solid var(--ink); border-radius: 12px; overflow: hidden; margin-bottom: 8px; }
+  .b .palette i { flex: 1; border-right: 3px solid var(--ink); }
+  .b .palette i:last-child { border: 0; }
+  .b .stage { background: var(--sky); border: 3px solid var(--ink); border-radius: 22px; padding: 18px; box-shadow: 5px 5px 0 var(--ink); position: relative; }
+  .b .speech { position: absolute; left: 14px; top: 12px; background: #fff; border: 2.5px solid var(--ink); border-radius: 14px; padding: 4px 10px; font: 400 18px/1 Chewy; transform: rotate(-5deg); }
+  .b .speech:after { content: ''; position: absolute; left: 22px; bottom: -10px; border: 8px solid transparent; border-top-color: var(--ink); }
+  .b table { width: 100%; border-collapse: collapse; }
+  .b td { padding: 7px 0; border-bottom: 2px dashed var(--ink); }
+  .b td:last-child { text-align: right; font-weight: 700; }
+  .b .burst { display: inline-block; background: #ffe066; border: 2.5px solid var(--ink); padding: 6px 12px; font: 400 18px/1 Chewy; clip-path: polygon(0 20%, 8% 0, 20% 15%, 35% 0, 50% 14%, 65% 0, 80% 15%, 92% 0, 100% 20%, 94% 50%, 100% 80%, 92% 100%, 80% 85%, 65% 100%, 50% 86%, 35% 100%, 20% 85%, 8% 100%, 0 80%, 6% 50%); padding: 14px 18px; }
+  @media (max-width: 760px) {
+    .b .board { grid-template-columns: 1fr; }
+    .b .hero .yarnball { width: 96px; top: -6px; }
+    .b .hero p { margin-left: 0; }
+    .b .menu span:nth-child(n+3) { display: none; }
+    .b .bubble { padding: 4px 22px 10px; border-width: 4px; }
+  }
+
+  /* =====================================================================
+     C — "Chart Paper"  (graph-paper grid like a knitting chart, mono type, thin green lines)
+     ===================================================================== */
+  .c { --ink: #26302a; --green: #2f8f5b; --leaf: #8fdc7e; --orange: #ff6a3d; --paper: #f6f4ee; --grid: #dfe6ea; --margin: #ef8f8f; --sun: #fff27a;
+       color: var(--ink); font: 400 14px/1.6 'Space Mono', monospace;
+       background-color: var(--paper);
+       background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+       background-size: 22px 22px; }
+  .c .sheet { border-left: 1.5px solid var(--margin); border-right: 1.5px solid var(--margin); max-width: 1180px; margin: 0 auto; min-height: 100vh; }
+  .c header { display: grid; grid-template-columns: auto 1fr auto; align-items: center; border-bottom: 1.5px solid var(--ink); }
+  .c .mark { background: var(--sun); padding: 14px 16px; border-right: 1.5px solid var(--ink); font: 700 15px/1.05 'Space Grotesk'; text-transform: uppercase; }
+  .c .mark small { display: block; color: var(--orange); }
+  .c header nav { display: flex; gap: 22px; justify-content: center; font-size: 12px; text-transform: uppercase; }
+  .c header .icons { padding: 0 16px; font-size: 12px; }
+  .c .sub { display: flex; gap: 16px; align-items: center; padding: 8px 16px; border-bottom: 1.5px solid var(--ink); font-size: 12px; text-transform: uppercase; }
+  .c .search { flex: 1; max-width: 340px; border: 1.5px solid var(--ink); padding: 4px 10px; background: #fff; color: #888; text-transform: none; }
+  .c .hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; border-bottom: 1.5px solid var(--ink); }
+  .c .hero-l { padding: 36px 24px; border-right: 1.5px solid var(--ink); position: relative; }
+  .c h1 { font: 500 clamp(32px, 5vw, 56px)/1.02 'Space Grotesk'; text-transform: uppercase; margin: 0 0 14px; letter-spacing: -.01em; }
+  .c h1 span { color: var(--orange); }
+  .c .meta { font-size: 12px; margin: 0 0 18px; }
+  .c .meta b { color: var(--green); font-weight: 400; }
+  .c .btn { display: inline-block; background: var(--leaf); border: 1.5px solid var(--ink); padding: 9px 20px; font: 700 12px/1 'Space Mono'; text-transform: uppercase; letter-spacing: .06em; cursor: pointer; }
+  .c .btn.dark { background: var(--green); color: #fff; }
+  .c .stamp { position: absolute; right: 20px; bottom: 22px; transform: rotate(-3deg); border: 1.5px solid var(--ink); padding: 8px 12px; font: 700 20px/1 'Space Mono'; background: #fff; }
+  .c .hero-r { display: grid; place-items: center; padding: 22px; background: #fff8; position: relative; }
+  .c .hero-r .bar { position: absolute; left: 0; top: 0; bottom: 0; width: 22px; background: var(--orange); }
+  .c .hero-r svg.sweater { max-width: 380px; }
+  .c .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+  .c .cell { padding: 20px 18px; border-right: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); }
+  .c .cell:last-child { border-right: 0; }
+  .c h3 { font: 500 18px/1 'Space Grotesk'; text-transform: uppercase; margin: 0 0 14px; display: flex; justify-content: space-between; }
+  .c h3 small { color: var(--green); font: 400 11px 'Space Mono'; text-decoration: underline; }
+  .c .in { border: 1.5px solid var(--ink); background: #fff; padding: 6px 10px; margin: 4px 0 12px; font-size: 13px; }
+  .c label { font-size: 11px; text-transform: uppercase; color: #6c756f; }
+  .c .chips { display: flex; gap: 6px; margin: 6px 0 12px; }
+  .c .chips i { width: 34px; height: 34px; border: 1.5px solid var(--ink); display: block; }
+  .c .palette { display: flex; height: 22px; border: 1.5px solid var(--ink); margin-bottom: 8px; }
+  .c .palette i { flex: 1; }
+  .c table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .c td { padding: 6px 0; border-bottom: 1px solid var(--grid); }
+  .c td:last-child { text-align: right; }
+  .c .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--green); margin-right: 6px; }
+  .c footer { display: flex; justify-content: space-between; padding: 18px 16px; font-size: 12px; text-transform: uppercase; }
+  .c .loopline { display: block; width: 100%; height: 46px; color: var(--orange); border-bottom: 1.5px solid var(--ink); }
+  @media (max-width: 760px) {
+    .c header { grid-template-columns: auto 1fr; }
+    .c header nav { display: none; }
+    .c .hero, .c .grid3 { grid-template-columns: 1fr; }
+    .c .hero-l { border-right: 0; border-bottom: 1.5px solid var(--ink); }
+    .c .cell { border-right: 0; }
+    .c .stamp { position: static; display: inline-block; margin-bottom: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Shared sweater drawing; colors come from CSS variables on the <svg>. -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <pattern id="knitV" width="5" height="5" patternUnits="userSpaceOnUse">
+      <path d="M0.5 0.5 L2.5 4.5 L4.5 0.5" fill="none" stroke="#000" stroke-opacity=".14" stroke-width=".8" />
+    </pattern>
+    <symbol id="sweater" viewBox="0 0 220 180">
+      <g stroke="var(--s-ink, #222)" stroke-width="var(--s-w, 1.5)" stroke-linejoin="round">
+        <path d="M80 18 L22 112 L42 126 L72 82 L72 56 Z" fill="var(--s1)" />
+        <path d="M140 18 L198 112 L178 126 L148 82 L148 56 Z" fill="var(--s1)" />
+        <path d="M80 18 Q110 40 140 18 L148 56 L152 168 L68 168 L72 56 Z" fill="var(--s1)" />
+        <path d="M72 70 L148 70 L149 84 L71 84 Z M71 98 L149 98 L150 112 L70 112 Z M70 126 L150 126 L151 140 L69 140 Z" fill="var(--s2)" stroke="none" />
+        <path d="M68 156 L152 156 L152 168 L68 168 Z" fill="var(--s3)" />
+        <path d="M22 112 L42 126 L36 134 L15 121 Z M198 112 L178 126 L184 134 L205 121 Z" fill="var(--s3)" />
+        <path d="M80 18 Q110 40 140 18 L136 12 Q110 31 84 12 Z" fill="var(--s3)" />
+        <path d="M80 18 Q110 40 140 18 L148 56 L152 168 L68 168 L72 56 Z M80 18 L22 112 L42 126 L72 82 Z M140 18 L198 112 L178 126 L148 82 Z" fill="url(#knitV)" stroke="none" />
+      </g>
+    </symbol>
+    <!-- a yarn strand with loops -->
+    <symbol id="loops" viewBox="0 0 300 80">
+      <path d="M2 60 C 40 60, 52 14, 78 20 C 100 25, 92 58, 70 52 C 48 46, 66 8, 108 18 C 140 26, 140 62, 170 58 C 196 54, 192 22, 172 26 C 150 30, 160 66, 200 62 C 240 58, 250 24, 298 30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+    </symbol>
+    <symbol id="arrowloop" viewBox="0 0 140 120">
+      <path d="M8 10 C 60 0, 90 40, 60 60 C 36 76, 30 40, 58 40 C 92 40, 110 80, 120 108" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M108 100 L120 110 L126 94" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+    <symbol id="ball" viewBox="0 0 120 120">
+      <circle cx="56" cy="62" r="44" fill="var(--b-fill, #ff7a45)" stroke="#141414" stroke-width="4" />
+      <path d="M20 46 C 46 40, 84 52, 96 80 M16 68 C 44 58, 80 70, 88 96 M30 28 C 50 38, 78 40, 100 56 M40 104 C 46 80, 70 60, 98 46" fill="none" stroke="#141414" stroke-width="3" stroke-linecap="round" />
+      <path d="M98 70 C 112 74, 118 88, 108 98 C 98 108, 86 96, 96 90 C 104 84, 116 96, 114 112" fill="none" stroke="#141414" stroke-width="3" stroke-linecap="round" />
+      <circle cx="44" cy="58" r="5" fill="#141414" /><circle cx="68" cy="58" r="5" fill="#141414" />
+      <path d="M46 74 Q56 84 66 74" fill="none" stroke="#141414" stroke-width="3" stroke-linecap="round" />
+    </symbol>
+  </defs>
+</svg>
+
+<div class="switch" role="tablist">
+  <button class="on" data-o="a">A · Studio Journal</button>
+  <button data-o="b">B · Doodle Pop</button>
+  <button data-o="c">C · Chart Paper</button>
+</div>
+
+<!-- ============================ A ============================ -->
+<section class="opt a on" id="a">
+  <nav><span><b>(Patterns)</b><b>(Yarns)</b><b>(Palettes)</b></span><span class="logo">loop &amp; swatch</span><span><b>(My projects)</b><b>(About)</b></span></nav>
+  <div class="hero">
+    <div class="hero-art">
+      <svg class="sweater" style="--s1:#e9dcc4;--s2:#2f5d4e;--s3:#e2552d;--s-ink:#2b2420"><use href="#sweater" /></svg>
+      <div class="badge">see it<br>first!</div>
+    </div>
+    <div class="hero-copy">
+      <div class="script">a new way to plan your next make</div>
+      <h1>See Your Sweater <em>Before</em> You Cast On</h1>
+      <p class="lede">Pick a pattern from Ravelry, bring your own yarn or let us suggest a palette, choose your size, and see an approximate preview with the yardage you'll need.</p>
+      <div><a class="pill">Start a project</a> &nbsp; <a class="pill ghost">Browse palettes</a></div>
+    </div>
+  </div>
+  <div class="ticker"><span>Worsted</span><b>✱</b><span>Fingering</span><b>✱</b><span>DK</span><b>✱</b><span>Raglan</span><b>✱</b><span>Round yoke</span><b>✱</b><span>Stripes</span><b>✱</b><span>Fair Isle</span><b>✱</b><span>Cardigan</span><b>✱</b><span>Aran</span></div>
+
+  <div class="intro">
+    <svg class="loop" style="left:6%;top:40px"><use href="#arrowloop" /></svg>
+    <h2>Raglans, round yokes, drop shoulders &amp; cardigans, in any colors you can dream up</h2>
+    <div class="dashed">
+      <span class="tag">Before you buy yarn</span>
+      <h3>Not sure which colors go together?</h3>
+      <a class="pill">Shuffle a palette</a>
+    </div>
+    <svg class="loop" style="right:6%;top:150px;transform:scaleX(-1)"><use href="#arrowloop" /></svg>
+  </div>
+
+  <div class="studio">
+    <div class="wrap">
+      <h4>Let's plan this sweater together</h4>
+      <div class="cols">
+        <div class="card">
+          <div class="kicker">Step one &amp; two</div>
+          <h5>Pattern &amp; Yarn</h5>
+          <label class="field"><span>Pattern</span><div class="in">Flax worsted · Tin Can Knits</div></label>
+          <label class="field"><span>Weight &amp; fiber</span><div class="in">Worsted · Wool</div></label>
+          <label class="field"><span>Your colors</span></label>
+          <div class="chips"><i style="background:#e9dcc4"></i><i style="background:#2f5d4e"></i><i style="background:#e2552d"></i></div>
+          <div class="palette"><i style="background:#d9cdb8"></i><i style="background:#4a4846"></i><i style="background:#8c7f6f"></i><i style="background:#f1ebe0"></i></div>
+          <div class="palette"><i style="background:#2f4a35"></i><i style="background:#b5652b"></i><i style="background:#d9a441"></i><i style="background:#e7dcc6"></i></div>
+        </div>
+        <div class="card">
+          <div class="kicker">Your preview</div>
+          <h5>Approximate Look</h5>
+          <div class="seg"><b class="on">Front</b><b>Back</b></div>
+          <div class="preview"><svg class="sweater" style="--s1:#e9dcc4;--s2:#2f5d4e;--s3:#e2552d;--s-ink:#2b2420"><use href="#sweater" /></svg></div>
+          <div class="note">↳ colors are approximate, swatch first!</div>
+        </div>
+        <div class="card">
+          <div class="kicker">Size M · classic fit</div>
+          <h5>Yarn Needed</h5>
+          <table>
+            <tr><td>A · Oatmeal</td><td>860 yd · 5</td></tr>
+            <tr><td>B · Forest</td><td>310 yd · 2</td></tr>
+            <tr><td>C · Rust</td><td>165 yd · 1</td></tr>
+            <tr><td><b>Total</b></td><td>1,335 yd</td></tr>
+          </table>
+          <p style="font-size:12px;color:#7b6e65">18 sts × 22 rows / 4" from the pattern · +8% texture · 10% buffer</p>
+          <a class="pill ghost">Make it more accurate</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ B ============================ -->
+<section class="opt b" id="b">
+  <nav><span class="home">Loopy!</span><span class="menu"><span>Patterns</span><span>Palettes</span><span>Yarns</span><span>♥ Saved</span></span></nav>
+  <div class="wrap">
+    <div class="hero">
+      <svg class="yarnball" style="--b-fill:#ff7a45"><use href="#ball" /></svg>
+      <div class="bubble">YARN</div><br>
+      <div class="bubble">VISUALIZER</div>
+      <p>Pick a pattern, pick your yarn (or let us pick colors), pick a size. Get a sweater preview and how many skeins to buy. Colors are approximate, our feelings are not.</p>
+      <p style="margin-top:14px"><a class="btn pink">Start knitting-ish →</a> &nbsp; <span class="burst">FREE!</span></p>
+    </div>
+
+    <div class="section-title"><span class="bubble">MAKE ONE</span></div>
+    <div class="board">
+      <div class="box">
+        <h3><span class="num">1</span> Pattern</h3>
+        <label>Search Ravelry</label><div class="in">Flax worsted ✓</div>
+        <h3><span class="num">2</span> Yarn</h3>
+        <label>Weight · fiber</label><div class="in">Worsted · Wool</div>
+        <h3><span class="num">3</span> Colors</h3>
+        <div class="chips"><i style="background:#ff4fa3"></i><i style="background:#7fd3ff"></i><i style="background:#ffe066"></i></div>
+        <div class="palette"><i style="background:#ff4fa3"></i><i style="background:#141414"></i><i style="background:#ffe066"></i><i style="background:#8fe3c7"></i></div>
+        <div class="palette"><i style="background:#ff7a45"></i><i style="background:#f4f1e8"></i><i style="background:#2e3a68"></i><i style="background:#7fd3ff"></i></div>
+        <a class="btn">↻ Shuffle!</a>
+      </div>
+      <div class="stage">
+        <span class="speech">ooh, cozy</span>
+        <svg class="sweater" style="--s1:#ff4fa3;--s2:#ffe066;--s3:#141414;--s-ink:#141414;--s-w:3"><use href="#sweater" /></svg>
+        <p style="text-align:center;margin:6px 0 0"><a class="btn">Front</a> <a class="btn" style="background:#ffe066">Back</a></p>
+      </div>
+      <div class="box">
+        <h3><span class="num">4</span> Size</h3>
+        <div class="in">M · classic fit (+4")</div>
+        <h3>Yarn needed</h3>
+        <table>
+          <tr><td>A · Hot pink</td><td>860 yd</td></tr>
+          <tr><td>B · Sunny</td><td>310 yd</td></tr>
+          <tr><td>C · Ink</td><td>165 yd</td></tr>
+          <tr><td>Total</td><td>8 skeins</td></tr>
+        </table>
+        <p style="font-size:13px">Approximate. Colors may vary. Please swatch, we beg you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ C ============================ -->
+<section class="opt c" id="c">
+  <div class="sheet">
+    <header>
+      <div class="mark">Yarn<small>Viz</small></div>
+      <nav><span>Patterns</span><span>Palettes</span><span>Yarns</span><span>About</span></nav>
+      <div class="icons">♡ &nbsp; ◯</div>
+    </header>
+    <div class="sub"><span>Catalog</span><span class="search">⌕ Search Ravelry patterns…</span><span>Saved (3)</span></div>
+    <div class="hero">
+      <div class="hero-l">
+        <div class="stamp">1,335 yd</div>
+        <h1>Plan the <span>sweater.</span><br>Then buy the yarn.</h1>
+        <p class="meta">Pattern <b>Flax worsted</b> · Shape <b>Raglan</b> · Gauge <b>18 × 22 / 4"</b> · Size <b>M</b></p>
+        <p style="max-width:440px">A preview of your pattern in your colors, at your size, with the yardage per color. Like a knitting chart, but for the whole sweater.</p>
+        <a class="btn">Start a project</a> &nbsp; <a class="btn dark">Try a palette</a>
+      </div>
+      <div class="hero-r">
+        <div class="bar"></div>
+        <svg class="sweater" style="--s1:#f4efe2;--s2:#ff6a3d;--s3:#2f8f5b;--s-ink:#26302a"><use href="#sweater" /></svg>
+      </div>
+    </div>
+    <svg class="loopline" viewBox="0 0 300 80" preserveAspectRatio="none"><use href="#loops" /></svg>
+    <div class="grid3">
+      <div class="cell">
+        <h3>01 Pattern + Yarn <small>change</small></h3>
+        <label>Pattern</label><div class="in">Flax worsted — Tin Can Knits</div>
+        <label>Weight / fiber</label><div class="in">Worsted / Wool</div>
+        <label>Colors</label>
+        <div class="chips"><i style="background:#f4efe2"></i><i style="background:#ff6a3d"></i><i style="background:#2f8f5b"></i></div>
+        <div class="palette"><i style="background:#f4efe2"></i><i style="background:#ff6a3d"></i><i style="background:#2f8f5b"></i><i style="background:#fff27a"></i></div>
+        <div class="palette"><i style="background:#26302a"></i><i style="background:#8fdc7e"></i><i style="background:#f6f4ee"></i><i style="background:#ef8f8f"></i></div>
+      </div>
+      <div class="cell">
+        <h3>02 Size <small>custom</small></h3>
+        <label>Size</label><div class="in">M (38" bust)</div>
+        <label>Fit</label><div class="in">Classic (+4")</div>
+        <table>
+          <tr><td>Finished chest</td><td>42.0"</td></tr>
+          <tr><td>Length</td><td>23.3"</td></tr>
+          <tr><td>Sleeve</td><td>18.0"</td></tr>
+        </table>
+      </div>
+      <div class="cell">
+        <h3>03 Yarn needed <small>more accurate</small></h3>
+        <table>
+          <tr><td>A · Natural</td><td>860 yd · 5 sk</td></tr>
+          <tr><td>B · Persimmon</td><td>310 yd · 2 sk</td></tr>
+          <tr><td>C · Fern</td><td>165 yd · 1 sk</td></tr>
+          <tr><td><b>Total</b></td><td><b>1,335 yd</b></td></tr>
+        </table>
+        <p style="font-size:12px"><span class="dot"></span>Colors are approximate and may vary.</p>
+        <a class="btn dark">Add to shopping list</a>
+      </div>
+    </div>
+    <footer><span>Yarn Viz</span><span>Patterns via Ravelry</span></footer>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.switch button').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('.switch button').forEach((x) => x.classList.toggle('on', x === b));
+    document.querySelectorAll('.opt').forEach((o) => o.classList.toggle('on', o.id === b.dataset.o));
+    window.scrollTo(0, 0);
+  }));
+</script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 // Print the email list as CSV.
 // Usage: BLOB_READ_WRITE_TOKEN=... npm run export-subscribers > subscribers.csv
-// (or `vercel env pull` first, then run with the token from .env.local)
+// The project's BLOB_READ_WRITE_TOKEN is a sensitive variable, so `vercel env pull` can't fetch it;
+// copy a token from Vercel → Storage → swatch-journal-subscribers instead.
 import { get, list } from '@vercel/blob';
 
 if (!process.env.BLOB_READ_WRITE_TOKEN) {

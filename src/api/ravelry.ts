@@ -9,7 +9,7 @@ export function yarnPhoto(y: RavYarn): string | undefined {
 export class RavelryUnavailable extends Error {}
 
 async function get<T>(path: string): Promise<T> {
-  const res = await fetch('/api/ravelry' + path);
+  const res = await fetch('/api/ravelry?p=' + encodeURIComponent(path));
   if (res.status === 503) throw new RavelryUnavailable('Ravelry credentials are not configured.');
   if (!res.ok) throw new Error(`Ravelry request failed (${res.status})`);
   return res.json() as Promise<T>;

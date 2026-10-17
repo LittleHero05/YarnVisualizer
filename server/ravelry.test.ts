@@ -36,6 +36,8 @@ describe('ravelry proxy', () => {
     expect(r1.status).toBe(200);
     expect(await r2.text()).toBe('{"yarn":{}}');
     expect(r1.headers.get('cache-control')).toContain('s-maxage');
+    // The CDN must key cached copies on the headers the origin check reads.
+    expect(r1.headers.get('vary')).toBe('Sec-Fetch-Site, Origin');
     expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(fetchMock.mock.calls[0]).toEqual(['https://api.ravelry.com/yarns/424242.json', { headers: { Authorization: auth } }]);
   });

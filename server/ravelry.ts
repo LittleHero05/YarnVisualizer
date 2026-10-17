@@ -17,6 +17,11 @@ const ALLOWED_PATHS = [
 export const CDN_CACHE = 'public, max-age=60, s-maxage=600, stale-while-revalidate=3600';
 /** Ravelry photos: kept about an hour, then re-fetched (license 2c). */
 export const IMG_CACHE = 'public, max-age=3600, s-maxage=3600';
+/**
+ * Cached copies are keyed on these request headers, so the CDN never hands a copy made for
+ * this site to a request that didn't pass the origin check (it reaches the function instead).
+ */
+export const CACHE_VARY = 'Sec-Fetch-Site, Origin';
 
 // ---------- access guard (license 1i: the proxy is for this app's own pages only) ----------
 
@@ -89,7 +94,7 @@ export function isAllowedPath(path: string): boolean {
 const json = (status: number, body: unknown, cacheable = false) =>
   new Response(typeof body === 'string' ? body : JSON.stringify(body), {
     status,
-    headers: { 'Content-Type': 'application/json', 'Cache-Control': cacheable ? CDN_CACHE : 'no-store' },
+    headers: { 'Content-Type': 'application/json', ...(cacheable ? { 'Cache-Control': CDN_CACHE, Vary: CACHE_VARY } : { 'Cache-Control': 'no-store' }) },
   });
 
 /** `path` is the Ravelry path plus query, e.g. "/patterns/search.json?query=flax". */
@@ -125,7 +130,7 @@ export async function proxyImage(rawUrl: string | null): Promise<Response> {
     if (!upstream.ok || !type.startsWith('image/')) return new Response('not an image', { status: 502 });
     return new Response(await upstream.arrayBuffer(), {
       status: 200,
-      headers: { 'Content-Type': type, 'Cache-Control': IMG_CACHE },
+      headers: { 'Content-Type': type, 'Cache-Control': IMG_CACHE, Vary: CACHE_VARY },
     });
   } catch {
     return new Response('upstream_unreachable', { status: 502 });

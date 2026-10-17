@@ -6,6 +6,14 @@ import { EstimatePanel } from './components/EstimatePanel';
 import { GarmentCanvas } from './components/GarmentCanvas';
 import { GarmentOptions } from './components/GarmentOptions';
 import { PatternPicker } from './components/PatternPicker';
+import { SiteFooter } from './components/SiteFooter';
+import { EmailSignup } from './components/EmailSignup';
+import { ExportPanel } from './components/ExportPanel';
+import { nearestColorName } from './color/colorNames';
+import { STITCHES } from './estimate/stitch';
+import type { CardSummary } from './export/card';
+import { EASE_OPTIONS } from './garments/sizing';
+import { SITE } from './site';
 import { SizePanel } from './components/SizePanel';
 import { YarnTypeForm } from './components/YarnTypeForm';
 import { useSuggestion } from './components/useSuggestion';
@@ -17,7 +25,7 @@ import type { PaintSpec } from './garments/paint';
 import { measurementsFor } from './garments/sizing';
 import { templateById } from './garments/templates';
 import { sizeKey, useProject, type PreviewBg } from './state/project';
-import { fmtLength } from './units';
+import { fmtGaugeSpan, fmtLength, fmtYarn, gaugeSpan } from './units';
 import { weightInfo } from './yarn/weights';
 
 const BACKGROUNDS: { id: PreviewBg; label: string }[] = [
@@ -67,6 +75,38 @@ export default function App() {
 
   const looks = s.slots.map((sl) => ({ hex: sl.hex, texture: sl.texture, accents: sl.accents }));
   const names = s.slots.map((sl) => (sl.mode === 'own' ? sl.colorway || sl.yarnName : ''));
+
+  const sizeName = s.size.preset === 'custom' ? `${fmtLength(s.size.bust, s.units, { trim: true })} bust` : s.size.preset;
+  const easeName = EASE_OPTIONS.find((e) => e.id === s.size.ease)?.name ?? '';
+  const span = gaugeSpan(s.units);
+  const cardSummary: CardSummary = {
+    title: s.pattern?.name ?? template.name,
+    subtitle: [s.view === 'front' ? 'Front' : 'Back', s.pattern?.designer && `by ${s.pattern.designer}`, template.name + (s.pattern && s.shapeOverride ? ' (changed)' : '')]
+      .filter(Boolean)
+      .join(' · '),
+    specs: [
+      ['Size', `${sizeName} · ${easeName.toLowerCase()} fit`],
+      ['Finished chest', fmtLength(m.chest, s.units)],
+      ['Length', fmtLength(m.armDepth + m.bodyLength, s.units)],
+      ['Sleeve', fmtLength(m.sleeveLength, s.units)],
+      ['Yarn', `${baseWeight.label} · ${s.fiber}`],
+      ['Gauge', `${Math.round(gauge.stPerIn * span * 2) / 2} sts × ${Math.round(gauge.rowsPerIn * span * 2) / 2} rows / ${fmtGaugeSpan(s.units)}`],
+      ['Stitch', STITCHES.find((x) => x.id === s.stitch)?.label ?? 'Stockinette'],
+    ],
+    colors: estimate.slots
+      .filter((e) => e.yards > 0 && s.slots[e.slot])
+      .map((e) => {
+        const sl = s.slots[e.slot];
+        const name = sl.mode === 'own' ? [sl.yarnName, sl.colorway].filter(Boolean).join(' · ') || 'Your yarn' : `${nearestColorName(sl.hex)} (suggested)`;
+        return { letter: 'ABCDE'[e.slot], hex: sl.hex, name, amount: `${fmtYarn(e.yards, s.units)} · ${e.skeins} skein${e.skeins === 1 ? '' : 's'}` };
+      }),
+    total: fmtYarn(estimate.total, s.units) + (estimate.basis === 'pattern' ? ' (pattern)' : ''),
+    footer: `Made with ${SITE.name}, an independent project by ${SITE.provider}. Pattern and yarn data via the Ravelry API; not affiliated with Ravelry.${s.pattern ? ` Pattern: ${s.pattern.url}` : ''}`,
+    site: typeof window !== 'undefined' ? window.location.host : SITE.name,
+  };
+  const vb = layouts[s.view].bbox;
+  const exportViewBox = `${vb.x} ${vb.y} ${vb.w} ${vb.h}`;
+  const exportFileName = `swatch-journal-${(s.pattern?.name ?? template.name).toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${s.size.preset.toLowerCase()}.png`;
 
   const projectNo = String((s.pattern?.id ?? 0) % 1000).padStart(3, '0');
 
@@ -151,9 +191,11 @@ export default function App() {
         <div className="col side">
           <SizePanel m={m} />
           <EstimatePanel result={estimate} gauge={gauge} weight={baseWeight} skeinGrams={skeinGrams} />
+          <ExportPanel summary={cardSummary} viewBox={exportViewBox} fileName={exportFileName} />
         </div>
       </main>
-      <footer className="footer">happy knitting ♡</footer>
+      <EmailSignup />
+      <SiteFooter />
     </div>
   );
 }
